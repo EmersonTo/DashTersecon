@@ -563,7 +563,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=270,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",
+                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",  template=templates,
                                title=dict(text='<b>TCM-GO</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
 
@@ -683,7 +683,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0), height=265,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",
+                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",  template=templates,
                                title=dict(text='<b>CAUC</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
 
