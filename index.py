@@ -16,6 +16,7 @@ from datetime import datetime
 # "Mineiros": 153, "Morrinhos": 159, "Cidade Ocidental": 283, "Pirenópolis": 195,
 # "Santa Helena": 212, "Valparaíso": 394, "Aurilândia": 27, "Niquelândia": 171,
 # "Goianésia": 88, "Sanclerlândia": 208, "Carmo do Rio Verde": 52, }
+server = app.server
 
 cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas Novas": 45, "Guapo": 103, "Montividiu": 158,
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
@@ -702,4 +703,4 @@ def update_timestamp(interval):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8051)
+    app.run_server(debug=True, port=8051)
