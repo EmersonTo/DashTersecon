@@ -22,7 +22,7 @@ cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas N
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
 
 templates = "SLATE"
-load_figure_template(templates)
+load_figure_template("SLATE")
 
 municipios = []
 for cidade in cidades:
@@ -563,7 +563,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=270,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",  template=templates,
+                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",  
                                title=dict(text='<b>TCM-GO</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
 
@@ -683,7 +683,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0), height=265,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",  template=templates,
+                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",  
                                title=dict(text='<b>CAUC</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
 
