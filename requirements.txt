@@ -6,3 +6,4 @@ numpy
 plotly==5.15.0
 gunicorn
 requests==2.31.0
+load_figure_template
