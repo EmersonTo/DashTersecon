@@ -22,7 +22,7 @@ cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas N
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
 
 templates = "SLATE"
-load_figure_template("SLATE")
+load_figure_template(templates)
 
 municipios = []
 for cidade in cidades:
