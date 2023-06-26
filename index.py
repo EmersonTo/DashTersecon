@@ -21,8 +21,8 @@ server = app.server
 cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas Novas": 45, "Guapo": 103, "Montividiu": 158,
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
 
-templates = "SLATE"
-load_figure_template(templates)
+template = "SLATE"
+load_figure_template(template)
 
 municipios = []
 for cidade in cidades:
@@ -678,7 +678,7 @@ def update_qtd_atrasados(municipios):
 
     fig_grafico2 = go.Figure()
     fig_grafico2.add_trace(
-        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde']))
+        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde'])
 
     fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0), height=265,
                                legend=dict(
@@ -686,6 +686,7 @@ def update_qtd_atrasados(municipios):
                                xaxis_title='Cidade', yaxis_title="Qtde de Pendências",  
                                title=dict(text='<b>CAUC</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
+    fig_grafico2.update_layout(template=template)
 
     # dash_table.DataTable(data=data, columns=columns, page_size=6)
     return atrasados, a_enviar, qtde_cauc, fig_grafico1, fig_grafico2
