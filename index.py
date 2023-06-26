@@ -98,7 +98,7 @@ app.layout = html.Div(children=[
                     dbc.Col([
                         dbc.Card([
                             dcc.Graph(
-                                id="id_fig_barra_atrasados_enviar_por_cidade", style={'width': '90vh', 'height': '90vh'})
+                                id="id_fig_barra_atrasados_enviar_por_cidade")
                         ], style={"margin-right": "20px", "padding": "10px", "height": "30vh"})
                     ])
 
