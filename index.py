@@ -1,6 +1,7 @@
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+import plotly.io as pio
 from dash_bootstrap_templates import load_figure_template
 import pandas as pd
 import numpy as np
@@ -21,7 +22,7 @@ server = app.server
 cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas Novas": 45, "Guapo": 103, "Montividiu": 158,
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
 
-template = "SLATE"
+template = "pulse"
 load_figure_template(template)
 
 municipios = []
@@ -31,6 +32,9 @@ municipios.sort()
 
 df_tcm = pd.read_csv("df_tcm.csv", sep=';')
 df_tcm = df_tcm.drop(columns=['Unnamed: 0'])
+print("aki")
+url = "https://www.tesourotransparente.gov.br/ckan/dataset/72b5f371-0c35-4613-8076-c99c821a6410/resource/07af297a-5e59-494a-a88a-55ddfd2f4b01/download/Relatorio-Situacao-de-Varios-Entes---Municipios---UF-Todas---Abrangencia-1.csv"
+print("aki")
 
 # LAYOUT
 app.layout = html.Div(children=[
@@ -563,11 +567,10 @@ def update_qtd_atrasados(municipios):
     fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=270,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",  
+                               xaxis_title='Cidade', yaxis_title="Qtde a Enviar",
                                title=dict(text='<b>TCM-GO</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
 
-    url = "https://www.tesourotransparente.gov.br/ckan/dataset/72b5f371-0c35-4613-8076-c99c821a6410/resource/07af297a-5e59-494a-a88a-55ddfd2f4b01/download/Relatorio-Situacao-de-Varios-Entes---Municipios---UF-Todas---Abrangencia-1.csv"
     df_cauc = pd.read_csv(url, sep=';', encoding='latin-1', skiprows=[0, 1, 2, 5572, 5573, 5574, 5575, 5576, 5577, 5578, 5579, 5580, 5581, 5582,
                           5583, 5584, 5585, 5586, 5587, 5588, 5589, 5590, 5591, 5592, 5593, 5594, 5595, 5596, 5597, 5598, 5599, 5600, 5601, 5602, 5603, 5604, 5605])
 
@@ -678,15 +681,15 @@ def update_qtd_atrasados(municipios):
 
     fig_grafico2 = go.Figure()
     fig_grafico2.add_trace(
-        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde'])
+        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde']))
 
     fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0), height=265,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
-                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",  
+                               xaxis_title='Cidade', yaxis_title="Qtde de Pendências",
                                title=dict(text='<b>CAUC</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
-    fig_grafico2.update_layout(template=template)
+    # fig_grafico2.update_layout(template=template)
 
     # dash_table.DataTable(data=data, columns=columns, page_size=6)
     return atrasados, a_enviar, qtde_cauc, fig_grafico1, fig_grafico2
