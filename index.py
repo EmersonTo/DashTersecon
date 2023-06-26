@@ -52,15 +52,8 @@ app.layout = html.Div(children=[
                     html.H3("Cidades:", style={
                         "font-size": "0.8vw"}),
                     dcc.Checklist(municipios, municipios, id="id_check_cidade", inputStyle={
-                                  "margin-right": "8px", "margin-left": "10px"}),
-                    html.Hr(style={
-                        "font-size": "0.4vw", "text-align": "center", "position": "absolute",  "bottom": "0",  "width": "98%", "height": "7rem"}),
-                    html.Footer("Desenvolvimento por", style={
-                        "font-size": "0.4vw", "text-align": "center", "position": "absolute",  "bottom": "0",  "width": "100%", "height": "7rem"}),
-                    html.Footer("Emerson Ferreira", style={
-                        "font-size": "0.4vw", "text-align": "center", "position": "absolute",  "bottom": "0",  "width": "100%", "height": "5rem"}),
-                    html.Footer(id='teste_atualizar', style={
-                        "font-size": "0.4vw", "text-align": "center", "position": "absolute",  "bottom": "0",  "width": "100%", "height": "2.5rem"})
+                                  "margin-right": "8px", "margin-left": "10px"})
+
                 ], style={"height": "95vh", "margin": "10px", "padding": "5px"})
 
             ], sm=2),
@@ -70,43 +63,43 @@ app.layout = html.Div(children=[
                     dbc.Col([
                         dbc.Card([
                             html.H1("Gestões Atrasadas", style={
-                                    "text-align": "center", "font-size": "1.2vw"}),
+                                    "text-align": "center"}),
                             html.H1(
-                                "TCM-GO", style={"text-align": "center", "font-size": "1.2vw"}),
+                                "TCM-GO", style={"text-align": "center"}),
                             html.Hr(),
                             html.H1(id="id_qtd_atrasados_tcm", style={
-                                    "text-align": "center", "font-size": "5vw"})
-                        ], style={"height": "calc(8vw + 8vh)",  "padding": "15px"})
+                                    "text-align": "center"})
+                        ], style={"padding": "15px"})
                     ], sm=4),
                     dbc.Col([
                         dbc.Card([
                             html.H1("Gestões a Enviar", style={
-                                    "text-align": "center", "font-size": "1.2vw"}),
+                                    "text-align": "center"}),
                             html.H1(
-                                "TCM-GO", style={"text-align": "center", "font-size": "1.2vw"}),
+                                "TCM-GO", style={"text-align": "center"}),
                             html.Hr(),
                             html.H1(id="id_qtd_enviar_tcm", style={
-                                    "text-align": "center", "font-size": "5vw"})
-                        ], style={"height": "calc(8vw + 8vh)",  "padding": "15px"})
+                                    "text-align": "center"})
+                        ], style={"padding": "15px"})
                     ], sm=4),
                     dbc.Col([
                         dbc.Card([
                             html.H1("Pendências", style={
-                                    "text-align": "center", "font-size": "1.2vw"}),
+                                    "text-align": "center"}),
                             html.H1("CAUC", style={
-                                    "text-align": "center", "font-size": "1.2vw"}),
+                                    "text-align": "center"}),
                             html.Hr(),
                             html.H1(id="id_qtd_cauc", style={
-                                    "text-align": "center", "font-size": "5vw"})
-                        ], style={"height": "calc(8vw + 8vh)",  "padding": "15px", "margin-right": "20px"})
-                    ], sm=4),
+                                    "text-align": "center"})
+                        ], style={"padding": "15px", "margin-right": "20px"})
+                    ], sm=4,),
                 ]),
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([
                             dcc.Graph(
-                                id="id_fig_barra_atrasados_enviar_por_cidade")
-                        ], style={"height": "calc(8.5vw + 8.5vh)",  "margin-right": "20px", "padding": "10px"})
+                                id="id_fig_barra_atrasados_enviar_por_cidade", style={'width': '90vh', 'height': '90vh'})
+                        ], style={"margin-right": "20px", "padding": "10px", "height": "30vh"})
                     ])
 
                 ]),
@@ -114,8 +107,8 @@ app.layout = html.Div(children=[
                     dbc.Col([
                             dbc.Card([
                                 dcc.Graph(
-                                    id="id_fig_barra_pendencia_cauc_por_cidade")
-                            ], style={"height": "calc(8.5vw + 8.5vh)",  "margin-right": "20px", "padding": "10px"})
+                                    id="id_fig_barra_pendencia_cauc_por_cidade", animate=True)
+                            ], style={"margin-right": "20px", "padding": "10px"})
                             ])
 
                 ]),
@@ -564,7 +557,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico1.add_trace(
         go.Bar(name="A Enviar", x=df_resumo['cidade'], y=df_resumo['a_enviar']))
 
-    fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=270,
+    fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), autosize=True,
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
                                xaxis_title='Cidade', yaxis_title="Qtde a Enviar",
@@ -577,9 +570,8 @@ def update_qtd_atrasados(municipios):
     # cidades_cauc = {"Aguas Lindas": 5200258, "Americano do Brasil": 5200852, "Ap. de Goiânia": 5201405, "Caldas Novas": 5204508, "Catalão": 5205109, "Castelândia":  5205059, "Ceres": 5205406, "Goiatuba": 5209101, "Inaciolância": 5209937, "Ipameri": 5210109, "Luziânia": 5212501,
     # "Mineiros": 5213103, "Morrinhos": 5213806, "Cidade Ocidental": 5205497, "Pirenópolis": 5217302, "Santa Helena": 5219308, "Valparaíso": 5221858, "Aurilândia": 5202601, "Niquelândia": 5214606, "Goianésia": 5208608, "Sanclerlândia": 5219001, "Carmo do Rio Verde": 5205000, }
 
-    cidades_cauc = {"Senador Canedo": 5200258, "Santo Antônio do Descoberto": 5200852, "Caldas Novas": 5201405,
-                    "Guapo": 5204508, "Montividiu": 5205109, "Iporá":  5205059,
-                    "Anápolis": 5205406, "Itarumã": 5209101, "Jataí": 5209937, "Fazenda Nova": 5210109}
+    cidades_cauc = {"Senador Canedo": 5220454, "Santo Antônio do Descoberto": 5219753, "Caldas Novas": 5204508,  "Guapo": 5209200,
+                    "Montividiu": 5213756, "Iporá":  5210208, "Anápolis": 5201108, "Itarumã": 5211305, "Jataí": 5211909, "Fazenda Nova": 5207600}
     codigo = []
     for key, value in cidades_cauc.items():
         codigo.append(value)
@@ -683,7 +675,7 @@ def update_qtd_atrasados(municipios):
     fig_grafico2.add_trace(
         go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde']))
 
-    fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0), height=265,
+    fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0),
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
                                xaxis_title='Cidade', yaxis_title="Qtde de Pendências",
@@ -695,16 +687,16 @@ def update_qtd_atrasados(municipios):
     return atrasados, a_enviar, qtde_cauc, fig_grafico1, fig_grafico2
 
 
-@app.callback([Output('teste_atualizar', 'children')],
-              [Input('buscar_dados', 'n_intervals')])
-def update_timestamp(interval):
-    data_e_hora_atuais = datetime.now()
-    print("*-*-*-*-*-*-*-*-*-*-*-*")
-    print(data_e_hora_atuais)
-    print("*-*-*-*-*-*-*-*-*-*-*-*")
-    data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M')
-    return [f"Última Atualização: {data_e_hora_em_texto}"]
+# @app.callback([Output('teste_atualizar', 'children')],
+# [Input('buscar_dados', 'n_intervals')])
+# def update_timestamp(interval):
+# data_e_hora_atuais = datetime.now()
+# print("*-*-*-*-*-*-*-*-*-*-*-*")
+# print(data_e_hora_atuais)
+# print("*-*-*-*-*-*-*-*-*-*-*-*")
+# data_e_hora_em_texto = data_e_hora_atuais.strftime('%d/%m/%Y %H:%M')
+# return [f"Última Atualização: {data_e_hora_em_texto}"]
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
