@@ -22,7 +22,7 @@ server = app.server
 cidades = {"Senador Canedo": 229, "Santo Antônio do Descoberto": 218, "Caldas Novas": 45, "Guapo": 103, "Montividiu": 158,
            "Iporá":  113, "Anápolis": 11, "Itarumã": 124, "Jataí": 139, "Fazenda Nova": 81}
 
-template = "pulse"
+template = "slate"
 load_figure_template(template)
 
 municipios = []
