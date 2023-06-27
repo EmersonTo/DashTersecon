@@ -32,9 +32,9 @@ municipios.sort()
 
 df_tcm = pd.read_csv("df_tcm.csv", sep=';')
 df_tcm = df_tcm.drop(columns=['Unnamed: 0'])
-print("aki")
+
 url = "https://www.tesourotransparente.gov.br/ckan/dataset/72b5f371-0c35-4613-8076-c99c821a6410/resource/07af297a-5e59-494a-a88a-55ddfd2f4b01/download/Relatorio-Situacao-de-Varios-Entes---Municipios---UF-Todas---Abrangencia-1.csv"
-print("aki")
+
 
 # LAYOUT
 app.layout = html.Div(children=[
@@ -62,44 +62,44 @@ app.layout = html.Div(children=[
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([
-                            html.H1("Gestões Atrasadas", style={
+                            html.H3("Gestões Atrasadas", style={
                                     "text-align": "center"}),
-                            html.H1(
+                            html.H3(
                                 "TCM-GO", style={"text-align": "center"}),
                             html.Hr(),
-                            html.H1(id="id_qtd_atrasados_tcm", style={
-                                    "text-align": "center"})
-                        ], style={"padding": "15px"})
+                            html.H3(id="id_qtd_atrasados_tcm", style={
+                                    "text-align": "center", "font-size": "3vw"})
+                        ], style={"margin": "10px", "padding": "5px", "height": "30vh"})
                     ], sm=4),
                     dbc.Col([
                         dbc.Card([
-                            html.H1("Gestões a Enviar", style={
+                            html.H3("Gestões a Enviar", style={
                                     "text-align": "center"}),
-                            html.H1(
+                            html.H3(
                                 "TCM-GO", style={"text-align": "center"}),
                             html.Hr(),
-                            html.H1(id="id_qtd_enviar_tcm", style={
-                                    "text-align": "center"})
-                        ], style={"padding": "15px"})
+                            html.H3(id="id_qtd_enviar_tcm", style={
+                                    "text-align": "center", "font-size": "3vw"})
+                        ], style={"margin": "10px", "padding": "5px", "height": "30vh"})
                     ], sm=4),
                     dbc.Col([
                         dbc.Card([
-                            html.H1("Pendências", style={
+                            html.H3("Pendências", style={
                                     "text-align": "center"}),
-                            html.H1("CAUC", style={
+                            html.H3("CAUC", style={
                                     "text-align": "center"}),
                             html.Hr(),
-                            html.H1(id="id_qtd_cauc", style={
-                                    "text-align": "center"})
-                        ], style={"padding": "15px", "margin-right": "20px"})
+                            html.H3(id="id_qtd_cauc", style={
+                                    "text-align": "center", "font-size": "3vw"})
+                        ], style={"padding": "5px",  "margin": "10px", "margin-right": "20px", "height": "30vh"})
                     ], sm=4,),
-                ]),
+                ], style={"height": "30vh"}),
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([
                             dcc.Graph(
-                                id="id_fig_barra_atrasados_enviar_por_cidade")
-                        ], style={"margin-right": "20px", "padding": "10px", "height": "30vh"})
+                                id="id_fig_barra_atrasados_enviar_por_cidade", style={"height": "31vh"})
+                        ], style={"margin": "10px", "margin-right": "20px", "margin-top": "20px", "padding": "10px", "height": "31vh"})
                     ])
 
                 ]),
@@ -107,8 +107,8 @@ app.layout = html.Div(children=[
                     dbc.Col([
                             dbc.Card([
                                 dcc.Graph(
-                                    id="id_fig_barra_pendencia_cauc_por_cidade", animate=True)
-                            ], style={"margin-right": "20px", "padding": "10px"})
+                                    id="id_fig_barra_pendencia_cauc_por_cidade", style={"height": "31vh"})
+                            ], style={"margin": "10px", "margin-right": "20px",  "padding": "10px", "height": "31vh", "margin-top": "0px"})
                             ])
 
                 ]),
@@ -208,10 +208,25 @@ def update_qtd_atrasados(municipios):
     filterOutubro = df_tcm_filter.loc[df_tcm_filter['10'] == 0]
     filterNovembro = df_tcm_filter.loc[df_tcm_filter['11'] == 0]
     filterDezembro = df_tcm_filter.loc[df_tcm_filter['12'] == 0]
+    enviadoJaneiro = df_tcm_filter.loc[df_tcm_filter['1'] == 1]
+    enviadoFevereiro = df_tcm_filter.loc[df_tcm_filter['2'] == 1]
+    enviadoMarco = df_tcm_filter.loc[df_tcm_filter['3'] == 1]
+    enviadoAbril = df_tcm_filter.loc[df_tcm_filter['4'] == 1]
+    enviadoMaio = df_tcm_filter.loc[df_tcm_filter['5'] == 1]
+    enviadoJunho = df_tcm_filter.loc[df_tcm_filter['6'] == 1]
+    enviadoJulho = df_tcm_filter.loc[df_tcm_filter['7'] == 1]
+    enviadoAgosto = df_tcm_filter.loc[df_tcm_filter['8'] == 1]
+    enviadoSetembro = df_tcm_filter.loc[df_tcm_filter['9'] == 1]
+    enviadoOutubro = df_tcm_filter.loc[df_tcm_filter['10'] == 1]
+    enviadoNovembro = df_tcm_filter.loc[df_tcm_filter['11'] == 1]
+    enviadoDezembro = df_tcm_filter.loc[df_tcm_filter['12'] == 1]
 
     # criando o grafico
     colunas = ['cidade', 'ano', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
-               'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+               'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+               'enviadoJaneiro', 'enviadoFevereiro', 'enviadoMarco', 'enviadoAbril', 'enviadoMaio',
+               'enviadoJunho', 'enviadoJulho', 'enviadoAgosto', 'enviadoSetembro', 'enviadoOutubro',
+               'enviadoNovembro', 'enviadoDezembro']
     df_resumo = pd.DataFrame(columns=colunas)
     for cidade in municipios:
         df_cidade = df_tcm_filter.loc[df_tcm_filter['cidade'] == cidade]
@@ -227,6 +242,18 @@ def update_qtd_atrasados(municipios):
         filterOutubroAtrasado = df_cidade.loc[df_cidade['10'] == 0]
         filterNovembroAtrasado = df_cidade.loc[df_cidade['11'] == 0]
         filterDezembroAtrasado = df_cidade.loc[df_cidade['12'] == 0]
+        filterJaneiroEnviado = df_cidade.loc[df_cidade['1'] == 1]
+        filterFevereiroEnviado = df_cidade.loc[df_cidade['2'] == 1]
+        filterMarcoEnviado = df_cidade.loc[df_cidade['3'] == 1]
+        filterAbrilEnviado = df_cidade.loc[df_cidade['4'] == 1]
+        filterMaioEnviado = df_cidade.loc[df_cidade['5'] == 1]
+        filterJunhoEnviado = df_cidade.loc[df_cidade['6'] == 1]
+        filterJulhoEnviado = df_cidade.loc[df_cidade['7'] == 1]
+        filterAgostoEnviado = df_cidade.loc[df_cidade['8'] == 1]
+        filterSetembroEnviado = df_cidade.loc[df_cidade['9'] == 1]
+        filterOutubroEnviado = df_cidade.loc[df_cidade['10'] == 1]
+        filterNovembroEnviado = df_cidade.loc[df_cidade['11'] == 1]
+        filterDezembroEnviado = df_cidade.loc[df_cidade['12'] == 1]
         new_row = pd.Series({'cidade': cidade, 'ano': 2023,
                              'Janeiro': len(filterJaneiroAtrasado),
                              'Fevereiro': len(filterFevereiroAtrasado),
@@ -239,23 +266,42 @@ def update_qtd_atrasados(municipios):
                              'Setembro': len(filterSetembroAtrasado),
                              'Outubro': len(filterOutubroAtrasado),
                              'Novembro': len(filterNovembroAtrasado),
-                             'Dezembro': len(filterDezembroAtrasado)})
+                             'Dezembro': len(filterDezembroAtrasado),
+
+                             'enviadoJaneiro': len(filterJaneiroEnviado),
+                             'enviadoFevereiro': len(filterFevereiroEnviado),
+                             'enviadoMarco': len(filterMarcoEnviado),
+                             'enviadoAbril': len(filterAbrilEnviado),
+                             'enviadoMaio': len(filterMaioEnviado),
+                             'enviadoJunho': len(filterJunhoEnviado),
+                             'enviadoJulho': len(filterJulhoEnviado),
+                             'enviadoAgosto': len(filterAgostoEnviado),
+                             'enviadoSetembro': len(filterSetembroEnviado),
+                             'enviadoOutubro': len(filterOutubroEnviado),
+                             'enviadoNovembro': len(filterNovembroEnviado),
+                             'enviadoDezembro': len(filterDezembroEnviado)
+
+                             })
         df_resumo = pd.concat(
             [df_resumo, new_row.to_frame().T], ignore_index=True)
 
     if mes_enviar == 1:
         atrasados = 0
         a_enviar = len(filterJaneiro)
+        enviado = len(enviadoJaneiro)
         df_resumo['atrasado'] = 0
         df_resumo['a_enviar'] = df_resumo['Janeiro']
+        df_resumo['enviado'] = df_resumo['enviadoJaneiro']
         COLUNAS = ['cidade', 'nome_orgao', 'ano', 'mes']
         df_tcm_mes = pd.DataFrame(columns=COLUNAS)
 
     elif mes_enviar == 2:
         atrasados = len(filterJaneiro)
         a_enviar = len(filterFevereiro)
+        enviado = len(enviadoFevereiro)
         df_resumo['atrasado'] = df_resumo['Janeiro']
         df_resumo['a_enviar'] = df_resumo['Fevereiro']
+        df_resumo['enviado'] = df_resumo['enviadoFevereiro']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
 
         df_tcm_mes_1['mes'] = 'Janeiro'
@@ -264,8 +310,10 @@ def update_qtd_atrasados(municipios):
     elif mes_enviar == 3:
         atrasados = len(filterJaneiro) + len(filterFevereiro)
         a_enviar = len(filterMarco)
+        enviado = len(enviadoMarco)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro']
         df_resumo['a_enviar'] = df_resumo['Março']
+        df_resumo['enviado'] = df_resumo['enviadoMarco']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_1['mes'] = 'Janeiro'
@@ -277,9 +325,11 @@ def update_qtd_atrasados(municipios):
         atrasados = len(filterJaneiro) + \
             len(filterFevereiro) + len(filterMarco)
         a_enviar = len(filterAbril)
+        enviado = len(enviadoAbril)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + \
             df_resumo['Fevereiro'] + df_resumo['Março']
         df_resumo['a_enviar'] = df_resumo['Abril']
+        df_resumo['enviado'] = df_resumo['enviadoAbril']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -294,12 +344,15 @@ def update_qtd_atrasados(municipios):
         df_tcm_mes = df_tcm_mes.reset_index(drop=True)
 
     elif mes_enviar == 5:
+
         atrasados = len(filterJaneiro) + len(filterFevereiro) + \
             len(filterMarco) + len(filterAbril)
         a_enviar = len(filterMaio)
+        enviado = len(enviadoMaio)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + \
             df_resumo['Fevereiro'] + df_resumo['Março'] + df_resumo['Abril']
         df_resumo['a_enviar'] = df_resumo['Maio']
+        df_resumo['enviado'] = df_resumo['enviadoMaio']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -320,9 +373,11 @@ def update_qtd_atrasados(municipios):
         atrasados = len(filterJaneiro) + len(filterFevereiro) + \
             len(filterMarco) + len(filterAbril) + len(filterMaio)
         a_enviar = len(filterJunho)
+        enviado = len(enviadoJunho)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + \
             df_resumo['Março'] + df_resumo['Abril'] + df_resumo['Maio']
         df_resumo['a_enviar'] = df_resumo['Junho']
+        df_resumo['enviado'] = df_resumo['enviadoJunho']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -346,10 +401,12 @@ def update_qtd_atrasados(municipios):
             len(filterMarco) + len(filterAbril) + \
             len(filterMaio) + len(filterJunho)
         a_enviar = len(filterJulho)
+        enviado = len(enviadoJulho)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + \
             df_resumo['Março'] + df_resumo['Abril'] + \
             df_resumo['Maio'] + df_resumo['Junho']
         df_resumo['a_enviar'] = df_resumo['Julho']
+        df_resumo['enviado'] = df_resumo['enviadoJulho']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -375,10 +432,12 @@ def update_qtd_atrasados(municipios):
             len(filterMarco) + len(filterAbril) + \
             len(filterMaio) + len(filterJunho) + len(filterJulho)
         a_enviar = len(filterAgosto)
+        enviado = len(enviadoAgosto)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + df_resumo['Março'] + \
             df_resumo['Abril'] + df_resumo['Maio'] + \
             df_resumo['Junho'] + df_resumo['Julho']
         df_resumo['a_enviar'] = df_resumo['Agosto']
+        df_resumo['enviado'] = df_resumo['enviadoAgosto']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -406,10 +465,12 @@ def update_qtd_atrasados(municipios):
             len(filterMarco) + len(filterAbril) + len(filterMaio) + \
             len(filterJunho) + len(filterJulho) + len(filterAgosto)
         a_enviar = len(filterSetembro)
+        enviado = len(enviadoSetembro)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + df_resumo['Março'] + \
             df_resumo['Abril'] + df_resumo['Maio'] + \
             df_resumo['Junho'] + df_resumo['Julho'] + df_resumo['Agosto']
         df_resumo['a_enviar'] = df_resumo['Setembro']
+        df_resumo['enviado'] = df_resumo['enviadoSetembro']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -439,10 +500,12 @@ def update_qtd_atrasados(municipios):
             len(filterMarco) + len(filterAbril) + len(filterMaio) + len(filterJunho) + \
             len(filterJulho) + len(filterAgosto) + len(filterSetembro)
         a_enviar = len(filterOutubro)
+        enviado = len(enviadoOutubro)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + df_resumo['Março'] + df_resumo['Abril'] + \
             df_resumo['Maio'] + df_resumo['Junho'] + df_resumo['Julho'] + \
             df_resumo['Agosto'] + df_resumo['Setembro']
         df_resumo['a_enviar'] = df_resumo['Outubro']
+        df_resumo['enviado'] = df_resumo['enviadoOutubro']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -475,10 +538,12 @@ def update_qtd_atrasados(municipios):
             len(filterJulho) + len(filterAgosto) + \
             len(filterSetembro) + len(filterOutubro)
         a_enviar = len(filterNovembro)
+        enviado = len(enviadoNovembro)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + df_resumo['Março'] + df_resumo['Abril'] + \
             df_resumo['Maio'] + df_resumo['Junho'] + df_resumo['Julho'] + \
             df_resumo['Agosto'] + df_resumo['Setembro'] + df_resumo['Outubro']
         df_resumo['a_enviar'] = df_resumo['Novembro']
+        df_resumo['enviado'] = df_resumo['enviadoNovembro']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -513,11 +578,13 @@ def update_qtd_atrasados(municipios):
             len(filterJulho) + len(filterAgosto) + len(filterSetembro) + \
             len(filterOutubro) + len(filterNovembro)
         a_enviar = len(filterDezembro)
+        enviado = len(enviadoDezembro)
         df_resumo['atrasado'] = df_resumo['Janeiro'] + df_resumo['Fevereiro'] + df_resumo['Março'] + df_resumo['Abril'] + df_resumo['Maio'] + \
             df_resumo['Junho'] + df_resumo['Julho'] + df_resumo['Agosto'] + \
             df_resumo['Setembro'] + \
             df_resumo['Outubro'] + df_resumo['Novembro']
         df_resumo['a_enviar'] = df_resumo['Dezembro']
+        df_resumo['enviado'] = df_resumo['enviadoDezembro']
         df_tcm_mes_1 = df_tcm[df_tcm['1'] == 0]
         df_tcm_mes_2 = df_tcm[df_tcm['2'] == 0]
         df_tcm_mes_3 = df_tcm[df_tcm['3'] == 0]
@@ -552,10 +619,12 @@ def update_qtd_atrasados(municipios):
     columns = [{"name": i, "id": i, } for i in (df_tcm_mes.columns)]
 
     fig_grafico1 = go.Figure()
-    fig_grafico1.add_trace(go.Bar(name="Atrasados",
-                                  x=df_resumo['cidade'], y=df_resumo['atrasado']))
     fig_grafico1.add_trace(
         go.Bar(name="A Enviar", x=df_resumo['cidade'], y=df_resumo['a_enviar']))
+    fig_grafico1.add_trace(go.Bar(name="Atrasados",
+                                  x=df_resumo['cidade'], y=df_resumo['atrasado']))
+    # fig_grafico1.add_trace(go.Bar(name="Enviados",
+    # x=df_resumo['cidade'], y=df_resumo['enviado']))
 
     fig_grafico1.update_layout(margin=dict(l=0, r=0, t=0, b=0), autosize=True,
                                legend=dict(
@@ -586,9 +655,7 @@ def update_qtd_atrasados(municipios):
 
     for indeces, row in df_cauc_filter.iterrows():
         lista_pendencia = []
-        # print(row['cidade'], row['1.1'], row['1.3'],row['1.4'],row['1.5'],row['2.1.1'],row['2.1.2'],row['3.1.1'],
-        #     row['3.1.2'],row['3.2.1'],row['3.2.2'], row['3.2.3'],row['3.2.4'], row['3.3'], row['3.4.1'], row['3.4.2'],
-        #      row['3.5'],  row['4.1'], row['4.2'], row['5.1'], row['5.2'], row['5.3'], row['5.4'])
+
         if row['1.1'] == '!':
             lista_pendencia.append('1.1')
 
@@ -656,10 +723,11 @@ def update_qtd_atrasados(municipios):
             lista_pendencia.append('5.4')
         pendencia[row['cidade']] = lista_pendencia
 
-    colunas_cauc = ['cidade', 'Qtde']
+    colunas_cauc = ['cidade', 'Qtde', 'Lista']
     df_cauc_fig = pd.DataFrame(columns=colunas_cauc)
     for key, value in cidades.items():
-        new_row = pd.Series({'cidade': key, 'Qtde': len(pendencia[key])})
+        new_row = pd.Series({'cidade': key, 'Qtde': len(
+            pendencia[key]), 'lista': pendencia[key]})
 
         df_cauc_fig = pd.concat(
             [df_cauc_fig, new_row.to_frame().T], ignore_index=True)
@@ -669,21 +737,26 @@ def update_qtd_atrasados(municipios):
 
     df_cauc_fig_filter = df_cauc_fig_filter.sort_values('cidade')
     df_cauc_fig_filter = df_cauc_fig_filter.reset_index(drop=True)
+
+    list_pendencia = df_cauc_fig_filter['lista'].tolist()
+    new_lista = []
+    for l in list_pendencia:
+        new_lista.append(' - '.join(map(str, l)))
     qtde_cauc = df_cauc_fig_filter['Qtde'].sum()
-
     fig_grafico2 = go.Figure()
+    hovertemp = "<b>Código Pendência:</b> %{customdata} "
     fig_grafico2.add_trace(
-        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde']))
-
+        go.Bar(x=df_cauc_fig_filter['cidade'], y=df_cauc_fig_filter['Qtde'],
+               customdata=new_lista
+               ))
+    fig_grafico2.update_traces(hovertemplate=hovertemp)
     fig_grafico2.update_layout(margin=dict(l=0, r=0, t=25, b=0),
                                legend=dict(
                                    orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.21),
                                xaxis_title='Cidade', yaxis_title="Qtde de Pendências",
                                title=dict(text='<b>CAUC</b>', y=1, x=0.5, xanchor='center',
                                           yanchor='top', font=dict(size=20)))
-    # fig_grafico2.update_layout(template=template)
 
-    # dash_table.DataTable(data=data, columns=columns, page_size=6)
     return atrasados, a_enviar, qtde_cauc, fig_grafico1, fig_grafico2
 
 
